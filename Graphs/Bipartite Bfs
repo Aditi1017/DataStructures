@@ -28,7 +28,7 @@ bool isBipartiteBfs(int i, vector<int>adj[], int color[]){
                 color[it] = 1-color[node];
                 q.push(it);
             }
-            else if(color[node] == color[it])
+            else if(color[node] == color[it])    // checking current node color with adj node color
             return false;
         }
     }
