@@ -1,0 +1,70 @@
+/***
+
+Input: 
+3 2
+0 1
+1 2
+***/
+
+Output: 
+Yes
+
+***/
+
+#include <bits/stdc++.h>
+#include<iostream>
+using namespace std;
+
+bool isBipartiteDfs(int i, vector<int>adj[], int color[]){
+    
+    if(color[i]==-1) color[i]=1; //imp as first time mark the color
+    // agar if condition nhi lgai to humesha 1 krdega and jo dfs call se phle color set hua vo overwrite hoajyega
+    
+    for(auto it: adj[i]){   
+        if(color[it]==-1){
+         color[it] = 1 - color[i];
+         if(!isBipartiteDfs(it, adj, color)){   // if any of the adjacent node dfs call return false means complete false 
+             return false;
+         }
+        }
+        else{
+            if(color[it] == color[i])
+            return false;
+        }
+    }
+    return true;
+}
+
+bool CheckBipartite(vector<int>adj[], int n){
+    int color[n];
+    memset(color, -1, sizeof(color));
+    for(int i=0; i<n; i++){
+        if(color[i]==-1){
+            if(!isBipartiteDfs(i,adj, color))  // any of the component return false then entire graph is not BP     
+                return false;
+        }
+    }
+    return true;
+}
+
+int main() {
+	int V , e;
+	cin >> V  >> e;
+	vector<int> adj[V]; //vector of array to store edges
+
+	for(int i = 0 ; i<e ; i++){
+	    int u,v;
+	    cin >> u >>v;
+	    
+	    adj[u].push_back(v);
+	    adj[v].push_back(u);
+	}
+
+       if(CheckBipartite(adj, V))
+       cout << "Yes";
+       
+       else 
+       cout << "No";
+	
+	return 0;
+}
