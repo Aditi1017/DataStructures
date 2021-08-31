@@ -1,3 +1,16 @@
+/***
+Input :
+
+4 4
+0 2
+2 3
+0 3
+1 3
+
+Output: No
+
+***/
+
 #include <bits/stdc++.h>
 #include<iostream>
 using namespace std;
@@ -13,6 +26,7 @@ bool isBipartiteBfs(int i, vector<int>adj[], int color[]){
             if(color[it]==-1)
             {
                 color[it] = 1-color[node];
+                q.push(it);
             }
             else if(color[node] == color[it])
             return false;
@@ -24,13 +38,13 @@ bool isBipartiteBfs(int i, vector<int>adj[], int color[]){
 bool CheckBipartite(vector<int>adj[], int n){
     int color[n];
     memset(color, -1, sizeof(color));
-    for(int i=0; i<n; i++){
+    for(int i=0; i<n; i++){                    // components of graph
         if(color[i]==-1){
-            if(isBipartiteBfs(i,adj, color));
-                return true;
+            if(!isBipartiteBfs(i,adj, color))  // this ! is to check if even a single component is not BP then immediately return false dont check for other components
+                return false;
         }
     }
-    return false;
+    return true;
 }
 
 int main() {
