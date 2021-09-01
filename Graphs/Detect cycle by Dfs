@@ -1,0 +1,66 @@
+/***
+Input: 
+5 5
+0 1
+1 2
+1 4 
+4 3
+2 3
+
+Output:
+Cycle is present
+
+***/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+bool CheckCycle(int node, int parent, vector<int>adj[], vector<int>&vis){
+        
+            for(auto it: adj[node]){
+                if(!vis[it]){
+                    vis[it]=1;
+                    if(CheckCycle(it,node,adj,vis))
+                        return true;
+                }
+                else{
+                    if(it != parent)
+                    return true;
+                }
+            }
+             return false;
+        }
+    
+    // Function to detect cycle in an undirected graph.
+    bool isCycle(int V, vector<int> adj[]) {
+        vector<int>vis(V,0);
+        for(int i =0; i<V; i++){
+            if(!vis[i]){
+                if(CheckCycle(i,-1, adj,vis))
+                return true;;
+            }
+        }
+        return false;
+    }
+
+int main() {
+	int V , e;
+	cin >> V  >> e;
+	vector<int> adj[V]; //vector of array to store edges
+
+	for(int i = 0 ; i<e ; i++){
+	    int u,v;
+	    cin >> u >>v;
+	    
+	    adj[u].push_back(v);
+	    adj[v].push_back(u);
+	}
+
+       if(isCycle(V, adj))
+       cout << "Cycle is present";
+       else
+       cout << "Cycle not present";
+      
+	
+	return 0;
+}
