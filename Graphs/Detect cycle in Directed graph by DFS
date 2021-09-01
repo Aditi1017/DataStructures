@@ -15,17 +15,21 @@ Cycle is present
 using namespace std;
 
 bool CheckCycle(int node , vector<int>adj[], int vis[] , int dfsVis[]){
+	// arrive at a node
         vis[node]=1;
         dfsVis[node]=1;
+	
+	// do some work at node
         for(auto it: adj[node]){
             if(!vis[it]){
-               if(CheckCycle(it, adj, vis, dfsVis))
+               if(CheckCycle(it, adj, vis, dfsVis)) // if any of adj node return true then whole graph returns true
                 return true;
             }
             else if(dfsVis[it]){
                 return true;
             }
         }
+	// going back from node
         dfsVis[node] = 0;
         return false;
     }
