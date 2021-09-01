@@ -25,6 +25,7 @@ using namespace std;
 
 bool CheckCycle(int s, int V, vector<int>adj[], vector<int>&vis){
         queue<pair<int,int>>q;
+	vis[s]=1;
         q.push({s , -1});
         while(!q.empty()){
             int node = q.front().first;
