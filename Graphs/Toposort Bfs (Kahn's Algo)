@@ -1,0 +1,30 @@
+vector<int> topoSort(int V, vector<int> adj[]) 
+	{
+	   queue<int>q;                       // queue for bfs
+	   vector<int>Indegree(V,0);          // Indegree array
+	   for(int i = 0; i<V ; i++){
+	       for(auto it: adj[i]){           // filling values in indegree array
+	           Indegree[it]++;
+	       }
+	   }
+	   
+	   for(int i = 0 ; i<Indegree.size(); i++){        //push those elements whose indegree is zero
+	       if(Indegree[i]==0)
+	       q.push(i);
+	   }
+	   
+	   vector<int>topo;
+	   while(!q.empty()){               
+	       int node = q.front();
+	       q.pop();
+	       topo.push_back(node);                      // after pop push into result i.e topo vector
+	       
+	       for(auto it: adj[node]){
+	           Indegree[it]--;                        // after pop means that node  processing is done its link has to removed  so reduce indegree value of its adjacent nodes
+	           
+	           if(Indegree[it]==0)
+	           q.push(it);
+	       }
+	   }
+	   return topo;
+	}
