@@ -1,5 +1,19 @@
-// uses toposort and dfs
+/***
+Input: 
+6 7
+0 1 2
+0 4 1
+1 2 3
+4 2 2
+4 5 4
+5 3 1
 
+Output: 
+0 2 3 6 1 5 
+***/
+
+#include<bits/stdc++.h>
+using namespace std;
 
 void findTopoSort(int node, int vis[], stack<int> &st, vector<pair<int,int>> adj[]){
     vis[node] = 1;                                          //basically modified dfs where after dfs call gets over push into stack
@@ -11,7 +25,7 @@ void findTopoSort(int node, int vis[], stack<int> &st, vector<pair<int,int>> adj
 }
 
 
-void shortestPath(int src, int N, vector<pair<int,int>>adkj){
+void shortestPath(int src, int N, vector<pair<int,int>>adj[]){
     //generate toposort by vis array and a stack
     int vis[N] = {0};   
     stack<int>st;
@@ -25,18 +39,18 @@ void shortestPath(int src, int N, vector<pair<int,int>>adkj){
 //after toposort
 int dist[N];
 
-for(int i=0; i<N l i++)
+for(int i=0; i<N ; i++)
 {
-    dist[i] = 1e9;
+    dist[i] = INT_MAX;
 }
 
 dist[src] = 0;
 
 while(!st.empty()){
-    int node = st.top()
+    int node = st.top();
     st.pop();
     
-    if(dist[node]!= INF){   // check dis is non infinity means we have reached that node
+    if(dist[node]!= INT_MAX){   // check dis is non infinity means we have reached that node
         for(auto it: adj[node]){
             if(dist[node]+it.second < dist[it.first]){
                 dist[it.first] = dist[node]+it.second;
@@ -46,7 +60,7 @@ while(!st.empty()){
 }
 
 for(int i =0 ; i<N ; i++){
-    (dist[i] == 1e9) ? cout << "INF" : cout << dist[i] << " "; // 1e9 means non reachable
+    (dist[i] == INT_MAX) ? cout << "INF" : cout << dist[i] << " "; // 1e9 means non reachable
 }
 }
 int main() {
