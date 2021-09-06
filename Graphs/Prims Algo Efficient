@@ -19,7 +19,7 @@ int main(){
       
     bool mstSet[N]; 
   
-    for (int i = 0; i < N; i++) 
+    for (int i = 0; i < N; i++)    		O(N)
         key[i] = INT_MAX, mstSet[i] = false; 
     
     priority_queue< pair<int,int>, vector <pair<int,int>> , greater<pair<int,int>> > pq;
@@ -43,7 +43,7 @@ int main(){
     // 4 5 50 
     while(!pq.empty())
     { 
-        int u = pq.top().second; 
+        int u = pq.top().second;   		log(N)
         pq.pop(); 
         
         mstSet[u] = true; 
@@ -64,3 +64,5 @@ int main(){
         cout << parent[i] << " - " << i <<" \n"; 
 	return 0;
 }
+
+// TC: O(NlogN)
