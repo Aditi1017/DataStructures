@@ -1,0 +1,79 @@
+/*** 
+Input : 
+5 6
+0 1 2
+0 3 6
+1 2 3
+1 4 5
+2 4 7
+1 3 8
+
+Output: 
+0-1
+1-2
+0-3
+1-4
+***/
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	
+	int N,e;
+	cin >> N >> e;
+	vector<pair<int,int>> adj[N];
+	
+	int u , v , wt;
+	for(int i =0 ; i<e ; i++){
+	    cin >> u >> v >> wt;
+	    adj[u].push_back({v,wt});
+	    adj[v].push_back({u,wt});
+	}
+	
+	int parent[N];
+	int key[N];
+	bool mst[N];
+	
+	for(int i = 0 ; i<N ; i++){            
+	    parent[i] = -1, key[i] = INT_MAX , mst[i] = false;    // init all three arrays
+	}
+	
+	key[0] = 0;   // 0th index mark with 0 and its parent as -1
+	parent[0] = -1;
+	
+	// MST h n-1 edges
+	for(int count = 0 ; count < N-1 ; count++){   // O(N)
+	    int mini = INT_MAX, u; // Step 1: Find minimal in key array 
+
+	    
+	    for(int v = 0; v<N ; v++){     // O(N) // Step 2: check not part of mst and value is lesser than mini means its minimal
+	        if(mst[v]==false && key[v]<mini)
+	            mini = key[v], u = v;   // u here stores node for which adj nodes to be searched
+	    } 
+	    
+//Due to loop O(N^2) + TC of adj node loop so TC > O(N^2)
+
+	    
+	    
+	 // traversing adj nodes for every node is N+E   
+	    mst[u] = true; // Step 3 : After picking min key make it true in mst
+	    
+	    for(auto it: adj[u]){
+	        int v = it.first;
+	        int weight = it.second;
+	        if(mst[v]==false && weight < key[v]){   // if adj node not part of mst than update key
+	            key[v] = weight;     // update key
+	            parent[v] = u;         // store parent 
+	        }
+	    }
+	    
+	}
+	
+	for(int i = 1; i<N ; i++){
+	    cout << parent[i] << "-" << i << "\n";
+	}
+	
+	return 0;
+}
