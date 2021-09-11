@@ -46,6 +46,8 @@ bool CheckBipartite(vector<int>adj[], int n){
     }
     return true;
 }
+// agar ek component true aata h uss se benefit nhi h infact ye dkhna h agar ek bhi bp nhi h to return krdo false
+
 
 int main() {
 	int V , e;
