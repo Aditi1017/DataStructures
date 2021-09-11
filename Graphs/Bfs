@@ -10,7 +10,8 @@ Input :
 2 3
 3 4
 
-Output: 0 1 2 3 4 
+Output: 0 1 4 2 3 
+
 ***/
 
 #include <bits/stdc++.h>
@@ -55,7 +56,7 @@ int main() {
        vector<int> ans =  bfs(V, adj);
        for(int i = 0 ; i <ans.size(); i++)
        {
-           cout << i << " ";
+           cout << ans[i] << " ";
        }
         cout << endl;
 	
