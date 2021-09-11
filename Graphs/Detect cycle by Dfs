@@ -20,7 +20,7 @@ bool CheckCycle(int node, int parent, vector<int>adj[], vector<int>&vis){
             for(auto it: adj[node]){
                 if(!vis[it]){
                     vis[it]=1;
-                    if(CheckCycle(it,node,adj,vis))
+                    if(CheckCycle(it,node,adj,vis))    // if this dfs call goes deeper deeper and someone down the line returns true and we can directly return a true from here
                         return true;
                 }
                 else{
