@@ -4,10 +4,11 @@ Input:
 0 1
 1 2
 2 3
-3 3
+0 3
+
 
 Output: 
-Cycle is present
+Cycle not present
 
 ***/
 
@@ -34,7 +35,7 @@ bool CheckCycle(int node , vector<int>adj[], int vis[] , int dfsVis[]){
         return false;
     }
     
-    // Function to detect cycle in an undirected graph.
+    // Function to detect cycle in an directed graph.
    bool isCyclic(int V, vector<int> adj[]) {
         // code here
         int vis[V] , dfsVis[V];
